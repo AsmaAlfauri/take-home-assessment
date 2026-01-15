@@ -38,10 +38,19 @@ const Dashboard = () => {
 
   return (
     <div className="p-4 space-y-6">
-      {portfolio && <PortfolioCard portfolio={portfolio} />}
-      {dashboard && <TopGainersLosers data={dashboard} />}
-      {dashboard && <RecentNews news={dashboard.recentNews} />}
-      {dashboard && <ActiveAlerts alerts={dashboard.activeAlerts} />}
+      <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
+        <div className="md:w-1/2">
+          <TopGainersLosers data={dashboard} />
+        </div>
+        <div className="md:w-1/2 space-y-6">
+          <RecentNews news={dashboard.recentNews} />
+          <ActiveAlerts alerts={dashboard.activeAlerts} />
+        </div>
+      </div>
+
+      <div className="w-full">
+        <PortfolioCard portfolio={portfolio} />
+      </div>
     </div>
   );
 };

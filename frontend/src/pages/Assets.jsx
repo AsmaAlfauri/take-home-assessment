@@ -55,37 +55,35 @@ const AssetsPage = () => {
     return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
-    <div className="p-4 space-y-6">
-      <h1 className="text-3xl font-bold mb-4">Assets</h1>
+<div className="p-4 space-y-6">
+  <h1 className="text-3xl font-bold mb-4">Assets</h1>
 
-      {/* Search Input */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search by symbol or name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
+  {/* Search Input */}
+  <div className="mb-4 w-full md:w-1/2">
+    <input
+      type="text"
+      placeholder="Search by symbol or name..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
 
-      {/* Filter Buttons */}
-      <FilterButtons currentFilter={filter} setFilter={setFilter} />
+  {/* Filter Buttons */}
+  <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0">
+    <FilterButtons currentFilter={filter} setFilter={setFilter} />
+  </div>
 
-      {/* Assets Table */}
-      <AssetsTable
-        assets={filteredAssets()}
-        sortConfig={sortConfig}
-        setSortConfig={setSortConfig}
-        onRowClick={setSelectedAsset}
-      />
-      {selectedAsset && (
-        <AssetModal
-          asset={selectedAsset}
-          onClose={() => setSelectedAsset(null)}
-        />
-      )}
-    </div>
+  {/* Assets Table */}
+  <div className="overflow-x-auto">
+    <AssetsTable
+      assets={filteredAssets()}
+      sortConfig={sortConfig}
+      setSortConfig={setSortConfig}
+    />
+  </div>
+</div>
+
   );
 };
 
