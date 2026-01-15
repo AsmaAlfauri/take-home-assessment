@@ -18,7 +18,7 @@ const AlertsList = ({ alerts }) => {
         <div
           key={alert.id}
           className="bg-white p-3 sm:p-4 rounded-lg shadow border
-                     flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2"
+                     flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 "
         >
           {/* Alert content */}
           <div>

@@ -10,7 +10,7 @@ const ActiveAlerts = ({ alerts }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6 ">
       <h2 className="text-lg sm:text-xl font-semibold mb-4">🔔 Active Alerts</h2>
       <ul className="space-y-3 sm:space-y-4">
 {alerts.slice(0, 5).map((alert, index) => (

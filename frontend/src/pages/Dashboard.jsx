@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+      let interval;
     const fetchData = async () => {
       try {
         const portfolioResponse = await getPortfolio();
@@ -30,6 +31,8 @@ const Dashboard = () => {
     };
 
     fetchData();
+    interval = setInterval(fetchData, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) return <Loading count={4} height={48} />;

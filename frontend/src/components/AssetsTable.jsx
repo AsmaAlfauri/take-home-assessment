@@ -88,7 +88,7 @@ const AssetsTable = ({ assets, sortConfig, setSortConfig ,onRowClick }) => {
           <div
             key={asset.symbol}
             onClick={() => onRowClick?.(asset)}
-            className="bg-white rounded-lg shadow p-4 cursor-pointer"
+            className="bg-white rounded-lg shadow p-4 cursor-pointer "
           >
             <div className="flex justify-between items-center">
               <span className="font-semibold text-lg">{asset.symbol}</span>

@@ -12,9 +12,10 @@ const PortfolioPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let interval;
     const fetchPortfolio = async () => {
       try {
-        const response = await getPortfolio ();
+        const response = await getPortfolio();
         setPortfolio(response.data.data);
       } catch (err) {
         console.error(err);
@@ -24,10 +25,13 @@ const PortfolioPage = () => {
       }
     };
     fetchPortfolio();
+    interval = setInterval(fetchPortfolio, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) return <Loading count={5} height={40} />;
-  if (error) return <Error message={error} onRetry={() => window.location.reload()} />;
+  if (error)
+    return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
     <div className="p-4 space-y-6">

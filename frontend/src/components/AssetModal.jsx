@@ -6,12 +6,12 @@ const AssetModal = ({ asset, onClose }) => {
       <div
         className="bg-white rounded-lg shadow-lg relative
                    w-full max-w-md sm:max-w-lg
-                   p-4 sm:p-6"
+                   p-4 sm:p-6 "
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-lg"
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-lg px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition duration-200"
         >
           ✖
         </button>

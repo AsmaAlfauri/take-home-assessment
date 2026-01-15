@@ -11,6 +11,7 @@ const AlertsPage = () => {
   const [filter, setFilter] = useState("All"); // All / High / Medium / Low
 
   useEffect(() => {
+    let interval;
     const fetchData = async () => {
       try {
         const response = await getAlerts();
@@ -24,16 +25,21 @@ const AlertsPage = () => {
     };
 
     fetchData();
+    interval = setInterval(fetchData, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const filteredAlerts = () => {
     if (filter === "All") return alerts;
-    return alerts.filter((alert) => alert.severity.toLowerCase() === filter.toLowerCase());
+    return alerts.filter(
+      (alert) => alert.severity.toLowerCase() === filter.toLowerCase()
+    );
   };
 
   if (loading) return <Loading count={5} height={40} />;
-  if (error) return <Error message={error} onRetry={() => window.location.reload()} />;
-    const alertLevel =["All", "High", "Medium", "Low"];
+  if (error)
+    return <Error message={error} onRetry={() => window.location.reload()} />;
+  const alertLevel = ["All", "High", "Medium", "Low"];
   return (
     <div className="p-4 space-y-6">
       <h1 className="text-3xl font-bold mb-4">Alerts</h1>
@@ -45,7 +51,9 @@ const AlertsPage = () => {
             key={level}
             onClick={() => setFilter(level)}
             className={`px-4 py-2 rounded-md font-semibold border transition-colors ${
-              filter === level ? "bg-red-500 text-white" : "bg-white text-gray-700 hover:bg-gray-100"
+              filter === level
+                ? "bg-red-500 text-white"
+                : "bg-white text-gray-700 hover:bg-gray-100"
             }`}
           >
             {level}
