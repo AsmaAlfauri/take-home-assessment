@@ -12,6 +12,7 @@ const AssetsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,21 +33,20 @@ const AssetsPage = () => {
     fetchData();
   }, []);
 
-const filteredAssets = () => {
-  let assetsList = [];
-  if (filter === 'All') assetsList = [...stocks, ...crypto];
-  else if (filter === 'Stocks') assetsList = stocks;
-  else if (filter === 'Crypto') assetsList = crypto;
+  const filteredAssets = () => {
+    let assetsList = [];
+    if (filter === "All") assetsList = [...stocks, ...crypto];
+    else if (filter === "Stocks") assetsList = stocks;
+    else if (filter === "Crypto") assetsList = crypto;
 
-  if (!searchTerm) return assetsList;
+    if (!searchTerm) return assetsList;
 
-  return assetsList.filter(
-    (asset) =>
-      asset.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      asset.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-};
-
+    return assetsList.filter(
+      (asset) =>
+        asset.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        asset.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
 
   if (loading) return <Loading count={10} height={40} />;
   if (error)
@@ -71,7 +71,11 @@ const filteredAssets = () => {
       <FilterButtons currentFilter={filter} setFilter={setFilter} />
 
       {/* Assets Table */}
-      <AssetsTable assets={filteredAssets()} />
+      <AssetsTable
+        assets={filteredAssets()}
+        sortConfig={sortConfig}
+        setSortConfig={setSortConfig}
+      />
     </div>
   );
 };

@@ -1,31 +1,69 @@
-const AssetsTable = ({ assets }) => {
+import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
+
+const AssetsTable = ({ assets, sortConfig, setSortConfig }) => {
   const changeColor = (change) => (change >= 0 ? 'text-green-500' : 'text-red-500');
+
+  const handleSort = (key) => {
+    setSortConfig((prev) => {
+      if (prev.key === key) {
+        return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' };
+      }
+      return { key, direction: 'asc' };
+    });
+  };
+
+
+  const sortedAssets = () => {
+    if (!sortConfig.key) return assets;
+    const sorted = [...assets].sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1;
+      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+    return sorted;
+  };
+
+  const renderHeader = (label, key) => {
+    let icon = <FaSort className="inline ml-1 text-gray-400" />;
+    if (sortConfig.key === key) {
+      icon = sortConfig.direction === 'asc' ? (
+        <FaSortUp className="inline ml-1 text-gray-600" />
+      ) : (
+        <FaSortDown className="inline ml-1 text-gray-600" />
+      );
+    }
+    return (
+      <th
+        onClick={() => handleSort(key)}
+        className="p-3 text-left cursor-pointer select-none"
+      >
+        {label} {icon}
+      </th>
+    );
+  };
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border rounded-lg shadow-md">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 text-left border-b">Symbol</th>
-            <th className="p-2 text-left border-b">Name</th>
-            <th className="p-2 text-right border-b">Price</th>
-            <th className="p-2 text-right border-b">Change %</th>
-            <th className="p-2 text-right border-b">Volume</th>
+      <table className="min-w-full bg-white rounded-lg shadow">
+        <thead className="bg-gray-100">
+          <tr>
+            {renderHeader('Symbol', 'symbol')}
+            {renderHeader('Name', 'name')}
+            {renderHeader('Price', 'currentPrice')}
+            {renderHeader('Change %', 'changePercent')}
+            {renderHeader('Volume', 'volume')}
           </tr>
         </thead>
         <tbody>
-          {assets.map((asset, index) => (
-            <tr
-              key={index}
-              className="hover:bg-gray-50 transition-colors"
-            >
-              <td className="p-2">{asset.symbol}</td>
-              <td className="p-2">{asset.name}</td>
-              <td className="p-2 text-right">${asset.currentPrice.toLocaleString()}</td>
-              <td className={`p-2 text-right font-semibold ${changeColor(asset.changePercent)}`}>
+          {sortedAssets().map((asset, index) => (
+            <tr key={index} className="border-b hover:bg-gray-50">
+              <td className="p-3 font-semibold">{asset.symbol}</td>
+              <td className="p-3">{asset.name}</td>
+              <td className="p-3">${asset.currentPrice.toLocaleString()}</td>
+              <td className={`p-3 font-semibold ${changeColor(asset.changePercent)}`}>
                 {asset.changePercent.toFixed(2)}%
               </td>
-              <td className="p-2 text-right">{asset.volume?.toLocaleString() || '-'}</td>
+              <td className="p-3">{asset.volume.toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
