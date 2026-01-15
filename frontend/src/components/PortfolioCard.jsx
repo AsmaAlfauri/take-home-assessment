@@ -1,23 +1,50 @@
 const PortfolioCard = ({ portfolio }) => {
-    console.log('portfolio>>:',portfolio)
-  const changeColor = portfolio.totalChange >= 0 ? 'text-green-500' : 'text-red-500';
+  const changeColor = (change) =>
+    change >= 0 ? "text-green-500" : "text-red-500";
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Portfolio Summary</h2>
+    <div className="bg-white rounded-lg shadow p-6 space-y-4">
+      {/* Large screens */}
+      <div className="hidden sm:flex justify-between items-center">
+        <div>
+          <p className="text-gray-500">Total Portfolio Value</p>
+          <p className="text-2xl font-bold">
+            ${portfolio.totalValue.toLocaleString()}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500">Total Change</p>
+          <p
+            className={`text-xl font-semibold ${changeColor(
+              portfolio.totalChange
+            )}`}
+          >
+            ${portfolio.totalChange.toLocaleString()} (
+            {portfolio.totalChangePercent.toFixed(2)}%)
+          </p>
+        </div>
+      </div>
 
-      <p className="text-gray-700">
-        Total Value: <span className="font-bold">${portfolio.totalValue.toLocaleString()}</span>
-      </p>
-      <p className="text-gray-700">
-        Change: <span className={`${changeColor} font-bold`}>
-          ${portfolio.totalChange.toLocaleString()} ({portfolio.totalChangePercent.toFixed(2)}%)
-        </span>
-      </p>
-
-      <p className="text-gray-500 mt-2">
-        Assets in portfolio: <span className="font-semibold">{portfolio.assets.length}</span>
-      </p>
+      {/* Small screens */}
+      <div className="sm:hidden space-y-2">
+        <div>
+          <p className="text-gray-500">Total Portfolio Value</p>
+          <p className="text-xl font-bold">
+            ${portfolio.totalValue.toLocaleString()}
+          </p>
+        </div>
+        <div>
+          <p className="text-gray-500">Total Change</p>
+          <p
+            className={`text-lg font-semibold ${changeColor(
+              portfolio.totalChange
+            )}`}
+          >
+            ${portfolio.totalChange.toLocaleString()} (
+            {portfolio.totalChangePercent.toFixed(2)}%)
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
