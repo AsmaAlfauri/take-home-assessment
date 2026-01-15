@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { getDashboard, getPortfolio } from "../services/api";
 import PortfolioCard from "../components/PortfolioCard";
 import TopGainersLosers from "../components/TopGainersLosers";
-import RecentNews from '../components/RecentNews';
-import ActiveAlerts from '../components/ActiveAlerts';
+import RecentNews from "../components/RecentNews";
+import ActiveAlerts from "../components/ActiveAlerts";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 const Dashboard = () => {
   const [portfolio, setPortfolio] = useState(null);
@@ -30,8 +32,9 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
+  if (loading) return <Loading count={4} height={48} />;
+  if (error)
+    return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
     <div className="p-4 space-y-6">
