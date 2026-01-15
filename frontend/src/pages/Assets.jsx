@@ -4,6 +4,7 @@ import AssetsTable from "../components/AssetsTable";
 import FilterButtons from "../components/FilterButtons";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import AssetModal from "../components/AssetModal";
 
 const AssetsPage = () => {
   const [stocks, setStocks] = useState([]);
@@ -13,6 +14,7 @@ const AssetsPage = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,7 +77,14 @@ const AssetsPage = () => {
         assets={filteredAssets()}
         sortConfig={sortConfig}
         setSortConfig={setSortConfig}
+        onRowClick={setSelectedAsset}
       />
+      {selectedAsset && (
+        <AssetModal
+          asset={selectedAsset}
+          onClose={() => setSelectedAsset(null)}
+        />
+      )}
     </div>
   );
 };

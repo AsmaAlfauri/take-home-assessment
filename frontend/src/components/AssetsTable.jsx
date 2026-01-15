@@ -1,6 +1,6 @@
 import { FaSort, FaSortUp, FaSortDown } from 'react-icons/fa';
 
-const AssetsTable = ({ assets, sortConfig, setSortConfig }) => {
+const AssetsTable = ({ assets, sortConfig, setSortConfig ,onRowClick }) => {
   const changeColor = (change) => (change >= 0 ? 'text-green-500' : 'text-red-500');
 
   const handleSort = (key) => {
@@ -56,7 +56,7 @@ const AssetsTable = ({ assets, sortConfig, setSortConfig }) => {
         </thead>
         <tbody>
           {sortedAssets().map((asset, index) => (
-            <tr key={index} className="border-b hover:bg-gray-50">
+            <tr key={index} className="border-b hover:bg-gray-50 cursor-pointer"  onClick={() => onRowClick(asset)}>
               <td className="p-3 font-semibold">{asset.symbol}</td>
               <td className="p-3">{asset.name}</td>
               <td className="p-3">${asset.currentPrice.toLocaleString()}</td>
