@@ -1,14 +1,17 @@
-import { useState, useEffect } from 'react';
-import { getStocks, getCrypto } from '../services/api';
-import AssetsTable from '../components/AssetsTable';
-import FilterButtons from '../components/FilterButtons';
+import { useState, useEffect } from "react";
+import { getStocks, getCrypto } from "../services/api";
+import AssetsTable from "../components/AssetsTable";
+import FilterButtons from "../components/FilterButtons";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 const AssetsPage = () => {
   const [stocks, setStocks] = useState([]);
   const [crypto, setCrypto] = useState([]);
-  const [filter, setFilter] = useState('All'); 
+  const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +23,7 @@ const AssetsPage = () => {
         setCrypto(cryptoResponse.data);
       } catch (err) {
         console.error(err);
-        setError('Failed to fetch assets. Please try again later.');
+        setError("Failed to fetch assets. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -29,18 +32,40 @@ const AssetsPage = () => {
     fetchData();
   }, []);
 
-  const filteredAssets = () => {
-    if (filter === 'All') return [...stocks, ...crypto];
-    if (filter === 'Stocks') return stocks;
-    if (filter === 'Crypto') return crypto;
-  };
+const filteredAssets = () => {
+  let assetsList = [];
+  if (filter === 'All') assetsList = [...stocks, ...crypto];
+  else if (filter === 'Stocks') assetsList = stocks;
+  else if (filter === 'Crypto') assetsList = crypto;
 
-  if (loading) return <div>Loading assets...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
+  if (!searchTerm) return assetsList;
+
+  return assetsList.filter(
+    (asset) =>
+      asset.symbol.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      asset.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+};
+
+
+  if (loading) return <Loading count={10} height={40} />;
+  if (error)
+    return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
     <div className="p-4 space-y-6">
       <h1 className="text-3xl font-bold mb-4">Assets</h1>
+
+      {/* Search Input */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search by symbol or name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
 
       {/* Filter Buttons */}
       <FilterButtons currentFilter={filter} setFilter={setFilter} />

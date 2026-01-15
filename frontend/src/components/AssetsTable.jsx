@@ -5,27 +5,27 @@ const AssetsTable = ({ assets }) => {
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border rounded-lg shadow-md">
         <thead>
-          <tr className="bg-gray-100 text-left">
-            <th className="px-4 py-2">Symbol</th>
-            <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Price</th>
-            <th className="px-4 py-2">Change %</th>
-            <th className="px-4 py-2">Volume</th>
+          <tr className="bg-gray-100">
+            <th className="p-2 text-left border-b">Symbol</th>
+            <th className="p-2 text-left border-b">Name</th>
+            <th className="p-2 text-right border-b">Price</th>
+            <th className="p-2 text-right border-b">Change %</th>
+            <th className="p-2 text-right border-b">Volume</th>
           </tr>
         </thead>
         <tbody>
           {assets.map((asset, index) => (
             <tr
               key={index}
-              className="border-b hover:bg-gray-50 transition-colors"
+              className="hover:bg-gray-50 transition-colors"
             >
-              <td className="px-4 py-2 font-medium">{asset.symbol}</td>
-              <td className="px-4 py-2">{asset.name}</td>
-              <td className="px-4 py-2">${asset.currentPrice.toLocaleString()}</td>
-              <td className={`px-4 py-2 font-semibold ${changeColor(asset.changePercent)}`}>
+              <td className="p-2">{asset.symbol}</td>
+              <td className="p-2">{asset.name}</td>
+              <td className="p-2 text-right">${asset.currentPrice.toLocaleString()}</td>
+              <td className={`p-2 text-right font-semibold ${changeColor(asset.changePercent)}`}>
                 {asset.changePercent.toFixed(2)}%
               </td>
-              <td className="px-4 py-2">{asset.volume?.toLocaleString() || '-'}</td>
+              <td className="p-2 text-right">{asset.volume?.toLocaleString() || '-'}</td>
             </tr>
           ))}
         </tbody>
