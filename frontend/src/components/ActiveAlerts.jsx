@@ -10,14 +10,32 @@ const ActiveAlerts = ({ alerts }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">🔔 Active Alerts</h2>
-      <ul className="space-y-4">
-        {alerts.slice(0,5).map((alert, index) => (
-          <li key={index} className="border-b pb-2">
-            <p className="text-gray-700">{alert.message}</p>
-            <p className="text-gray-500 text-sm">{new Date(alert.timestamp).toLocaleString('en-US', { hour12: true })}</p>
-            <span className={`inline-block mt-1 px-2 py-1 text-xs rounded-full ${severityColor(alert.severity)}`}>
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+      <h2 className="text-lg sm:text-xl font-semibold mb-4">🔔 Active Alerts</h2>
+      <ul className="space-y-3 sm:space-y-4">
+{alerts.slice(0, 5).map((alert, index) => (
+          <li
+            key={index}
+            className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b pb-3"
+          >
+            {/* Alert content */}
+            <div>
+              <p className="text-gray-700 text-sm sm:text-base">
+                {alert.message}
+              </p>
+              <p className="text-gray-500 text-xs sm:text-sm">
+                {new Date(alert.timestamp).toLocaleString("en-US", {
+                  hour12: true,
+                })}
+              </p>
+            </div>
+
+            {/* Severity badge */}
+            <span
+              className={`self-start sm:self-center px-2 py-1 text-xs font-semibold rounded-full ${severityColor(
+                alert.severity
+              )}`}
+            >
               {alert.severity}
             </span>
           </li>

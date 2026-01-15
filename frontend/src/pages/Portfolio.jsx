@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getPortfolio } from "../services/api";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import PortfolioSummary from "../components/PortfolioSummary";
@@ -13,9 +14,8 @@ const PortfolioPage = () => {
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
-        const response = await fetch("/api/portfolio"); // مثال
-        const data = await response.json();
-        setPortfolio(data.data || data);
+        const response = await getPortfolio ();
+        setPortfolio(response.data.data);
       } catch (err) {
         console.error(err);
         setError("Failed to load portfolio. Please try again later.");

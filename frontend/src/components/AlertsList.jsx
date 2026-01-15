@@ -13,14 +13,28 @@ const AlertsList = ({ alerts }) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 sm:space-y-4">
       {alerts.slice(0, 5).map((alert) => (
-        <div key={alert.id} className="bg-white p-4 rounded-lg shadow-md border flex justify-between items-start">
+        <div
+          key={alert.id}
+          className="bg-white p-3 sm:p-4 rounded-lg shadow border
+                     flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2"
+        >
+          {/* Alert content */}
           <div>
-            <p className="font-medium">{alert.message}</p>
-            <p className="text-gray-500 text-sm">{new Date(alert.timestamp).toLocaleString()}</p>
+            <p className="font-medium text-sm sm:text-base">{alert.message}</p>
+            <p className="text-gray-500 text-xs sm:text-sm">
+              {new Date(alert.timestamp).toLocaleString()}
+            </p>
           </div>
-          <span className={`px-2 py-1 rounded-full text-sm font-semibold ${severityColor(alert.severity)}`}>
+
+          {/* Severity badge */}
+          <span
+            className={`self-start sm:self-auto px-2 py-1 rounded-full 
+                        text-xs sm:text-sm font-semibold ${severityColor(
+                          alert.severity
+                        )}`}
+          >
             {alert.severity}
           </span>
         </div>
