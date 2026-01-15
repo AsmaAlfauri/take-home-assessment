@@ -34,6 +34,7 @@ const News = () => {
   if (loading) return <Loading count={5} height={50} />;
   if (error)
     return <Error message={error} onRetry={() => window.location.reload()} />;
+
   const categories = [
     "All",
     "market",
@@ -43,21 +44,22 @@ const News = () => {
     "earnings",
     "regulatory",
   ];
+
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen text-gray-900 dark:text-white">
       <h1 className="text-3xl font-bold mb-4">News</h1>
 
       {/* Category Filter */}
-      <div className="flex space-x-4 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`px-4 py-2 rounded-md font-semibold border transition-colors
+            className={`px-4 py-2 rounded-md font-semibold border transition-colors duration-300 transform transition-all duration-300 hover:scale-105 hover:shadow-xl
               ${
                 category === cat
-                  ? "bg-blue-500 text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
+                  ? "bg-blue-500 text-white "
+                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
           >
             {cat.charAt(0).toUpperCase() + cat.slice(1)}

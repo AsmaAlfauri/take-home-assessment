@@ -55,8 +55,8 @@ const AssetsPage = () => {
     return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
-    <div className="p-4 space-y-6">
-      <h1 className="text-3xl font-bold mb-4">📊 Assets</h1>
+    <div className="p-4 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">📊 Assets</h1>
 
       {/* Search Input */}
       <div className="mb-4 w-full md:w-1/2">
@@ -65,17 +65,23 @@ const AssetsPage = () => {
           placeholder="Search by symbol or name..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border rounded-md 
+                     bg-white dark:bg-gray-800 
+                     text-gray-900 dark:text-gray-200 
+                     border-gray-300 dark:border-gray-700 
+                     placeholder-gray-400 dark:placeholder-gray-500
+                     focus:outline-none focus:ring-2 focus:ring-blue-500
+                     transition-colors duration-300"
         />
       </div>
 
       {/* Filter Buttons */}
-      <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0">
+      <div className="flex flex-col md:flex-row md:items-center md:space-x-4 space-y-2 md:space-y-0 ">
         <FilterButtons currentFilter={filter} setFilter={setFilter} />
       </div>
 
       {/* Assets Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto ">
         <AssetsTable
           assets={filteredAssets()}
           sortConfig={sortConfig}

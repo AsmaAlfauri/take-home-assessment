@@ -39,10 +39,13 @@ const AlertsPage = () => {
   if (loading) return <Loading count={5} height={40} />;
   if (error)
     return <Error message={error} onRetry={() => window.location.reload()} />;
+
   const alertLevel = ["All", "High", "Medium", "Low"];
   return (
-    <div className="p-4 space-y-6">
-      <h1 className="text-3xl font-bold mb-4">Alerts</h1>
+    <div className="p-4 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
+      <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+        Alerts
+      </h1>
 
       {/* Filter Buttons */}
       <div className="flex space-x-4 mb-4">
@@ -50,11 +53,13 @@ const AlertsPage = () => {
           <button
             key={level}
             onClick={() => setFilter(level)}
-            className={`px-4 py-2 rounded-md font-semibold border transition-colors ${
-              filter === level
-                ? "bg-red-500 text-white"
-                : "bg-white text-gray-700 hover:bg-gray-100"
-            }`}
+            className={`px-4 py-2 rounded-md font-semibold border transition-colors
+              w-full sm:w-auto transform transition-all duration-300 hover:scale-105 hover:shadow-xl
+              ${
+                filter === level
+                  ? "bg-red-500 text-white"
+                  : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+              }` }
           >
             {level}
           </button>

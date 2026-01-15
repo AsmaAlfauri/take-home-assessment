@@ -34,15 +34,18 @@ const PortfolioPage = () => {
     return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 space-y-6 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300 min-h-screen">
       <h1 className="text-3xl font-bold mb-4">Portfolio</h1>
+
       <PortfolioSummary
         totalValue={portfolio.totalValue}
         totalChange={portfolio.totalChange}
         totalChangePercent={portfolio.totalChangePercent}
         assetsCount={portfolio.assets.length}
       />
+      
       <PortfolioChart assets={portfolio.assets} />
+      
       <Watchlist symbols={portfolio.watchlist} />
     </div>
   );

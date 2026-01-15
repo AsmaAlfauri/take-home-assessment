@@ -1,70 +1,78 @@
-import { Link, useLocation } from 'react-router-dom'
-import { useState } from 'react'
-import MetaMaskButton from './MetaMaskButton'
-import DarkModeToggle from './DarkModeToggle'
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import DarkModeToggle from "./DarkModeToggle";
+import MetaMaskButton from "./MetaMaskButton";
 
 const Layout = ({ children }) => {
-  const location = useLocation()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const location = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const navigation = [
-    { name: 'Dashboard', path: '/', icon: '📊' },
-    { name: 'Assets', path: '/assets', icon: '💰' },
-    { name: 'News', path: '/news', icon: '📰' },
-    { name: 'Alerts', path: '/alerts', icon: '🔔' },
-    { name: 'Portfolio', path: '/portfolio', icon: '💼' },
-  ]
+    { name: "Dashboard", path: "/", icon: "📊" },
+    { name: "Assets", path: "/assets", icon: "💰" },
+    { name: "News", path: "/news", icon: "📰" },
+    { name: "Alerts", path: "/alerts", icon: "🔔" },
+    { name: "Portfolio", path: "/portfolio", icon: "💼" },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200 ">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <h1 className="text-2xl font-bold text-pulse-primary">Pulse</h1>
-              <span className="ml-2 text-sm text-gray-500">Market Monitoring Engine</span>
+              <span className="ml-2 text-sm text-gray-500">
+                Market Monitoring Engine
+              </span>
             </div>
-            <DarkModeToggle/>
-            <MetaMaskButton />
+            <div className="flex items-center space-x-2">
+              <DarkModeToggle />
+              <MetaMaskButton />
+            </div>
           </div>
         </div>
       </header>
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className={`${sidebarOpen ? 'w-64' : 'w-16'} bg-white border-r border-gray-200 min-h-[calc(100vh-4rem)] transition-all duration-300`}>
+<aside
+  className={`${
+    sidebarOpen ? "w-64" : "w-16"
+  } bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 min-h-[calc(100vh-4rem)] transition-all duration-300`}
+>
           <nav className="p-4">
             <ul className="space-y-2">
               {navigation.map((item) => {
-                const isActive = location.pathname === item.path
+                const isActive = location.pathname === item.path;
                 return (
                   <li key={item.path}>
                     <Link
                       to={item.path}
                       className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                         isActive
-                          ? 'bg-pulse-primary text-white'
-                          : 'text-gray-700 hover:bg-gray-100'
+                          ? "bg-pulse-primary text-white"
+                          :  "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                       }`}
                     >
                       <span className="text-xl">{item.icon}</span>
                       {sidebarOpen && <span>{item.name}</span>}
                     </Link>
                   </li>
-                )
+                );
               })}
             </ul>
           </nav>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 min-h-screen p-4 transition-colors duration-300  dark:bg-gray-800">
           {children}
         </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

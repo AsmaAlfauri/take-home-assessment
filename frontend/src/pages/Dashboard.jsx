@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-      let interval;
+    let interval;
     const fetchData = async () => {
       try {
         const portfolioResponse = await getPortfolio();
@@ -40,7 +40,7 @@ const Dashboard = () => {
     return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
       <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
         <div className="md:w-1/2">
           <TopGainersLosers data={dashboard} />
