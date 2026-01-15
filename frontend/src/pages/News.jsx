@@ -8,7 +8,7 @@ const News = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [impact, setImpact] = useState("All");
+  const [category, setCategory] = useState("All");
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -27,29 +27,40 @@ const News = () => {
   }, []);
 
   const filteredNews = () => {
-    if (impact === "All") return news;
-    return news.filter((item) => item.impact === impact);
+    if (category === "All") return news;
+    return news.filter((item) => item.category === category);
   };
 
   if (loading) return <Loading count={5} height={50} />;
   if (error)
     return <Error message={error} onRetry={() => window.location.reload()} />;
-  
-  const impacts = ["All", "critical", "high", "medium", "low"];
- return (
+  const categories = [
+    "All",
+    "market",
+    "crypto",
+    "technology",
+    "macro",
+    "earnings",
+    "regulatory",
+  ];
+  return (
     <div className="p-4 space-y-6">
       <h1 className="text-3xl font-bold mb-4">News</h1>
 
-      {/* Impact Filter */}
+      {/* Category Filter */}
       <div className="flex space-x-4 mb-4">
-        {impacts.map((imp) => (
+        {categories.map((cat) => (
           <button
-            key={imp}
-            onClick={() => setImpact(imp)}
+            key={cat}
+            onClick={() => setCategory(cat)}
             className={`px-4 py-2 rounded-md font-semibold border transition-colors
-              ${impact === imp ? "bg-blue-500 text-white" : "bg-white text-gray-700 hover:bg-gray-100"}`}
+              ${
+                category === cat
+                  ? "bg-blue-500 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
           >
-            {imp.charAt(0).toUpperCase() + imp.slice(1)}
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </button>
         ))}
       </div>
