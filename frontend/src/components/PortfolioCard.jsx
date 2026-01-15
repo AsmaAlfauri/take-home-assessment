@@ -3,7 +3,7 @@ const PortfolioCard = ({ portfolio }) => {
     change >= 0 ? "text-green-500" : "text-red-500";
 
   return(
-    <div className="bg-white rounded-lg shadow p-4 sm:p-6">
+    <div className="bg-white rounded-lg shadow p-4 sm:p-6 space-y-4 transform transition-all duration-300 hover:scale-105 hover:shadow-xl ">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         {/* Total Value */}
         <div>

@@ -48,7 +48,7 @@ const AssetsTable = ({ assets, sortConfig, setSortConfig ,onRowClick }) => {
       <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow">
           <thead className="bg-gray-100">
-            <tr>
+            <tr >
               {renderHeader("Symbol", "symbol")}
               {renderHeader("Name", "name")}
               {renderHeader("Price", "currentPrice")}
@@ -61,7 +61,7 @@ const AssetsTable = ({ assets, sortConfig, setSortConfig ,onRowClick }) => {
               <tr
                 key={asset.symbol}
                 onClick={() => onRowClick?.(asset)}
-                className="border-b hover:bg-gray-50 cursor-pointer"
+                className="border-b hover:bg-gray-50 cursor-pointer transform transition duration-200 hover:scale-[1.01]"
               >
                 <td className="p-3 font-semibold">{asset.symbol}</td>
                 <td className="p-3">{asset.name}</td>

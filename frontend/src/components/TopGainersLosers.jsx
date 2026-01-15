@@ -24,13 +24,13 @@ const TopGainersLosers = ({ data }) => {
   return (
     <div className="space-y-6">
       {/* Top Gainers */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-6 rounded-lg shadow-md space-y-4 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
         <h2 className="text-xl font-semibold mb-4">📈 Top Gainers</h2>
         <ul className="space-y-2">{topGainers.slice(0, 3).map(renderAsset)}</ul>
       </div>
 
       {/* Top Losers */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-6 rounded-lg shadow-md space-y-4 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
         <h2 className="text-xl font-semibold mb-4">📉 Top Losers</h2>
         <ul className="space-y-2">{topLosers.slice(0, 3).map(renderAsset)}</ul>
       </div>
