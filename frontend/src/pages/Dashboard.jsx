@@ -1,17 +1,46 @@
-// Dashboard Page - TO BE IMPLEMENTED BY CANDIDATE
-// This is a basic placeholder structure
+import { useState, useEffect } from "react";
+import { getDashboard, getPortfolio } from "../services/api";
+import PortfolioCard from "../components/PortfolioCard";
+import TopGainersLosers from "../components/TopGainersLosers";
+import RecentNews from '../components/RecentNews';
+import ActiveAlerts from '../components/ActiveAlerts';
 
 const Dashboard = () => {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-      <div className="bg-white p-6 rounded-lg shadow">
-        <p className="text-gray-600">
-          Dashboard implementation goes here. Check the assessment instructions for requirements.
-        </p>
-      </div>
-    </div>
-  )
-}
+  const [portfolio, setPortfolio] = useState(null);
+  const [dashboard, setDashboard] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-export default Dashboard
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const portfolioResponse = await getPortfolio();
+        setPortfolio(portfolioResponse.data.data);
+
+        const dashboardResponse = await getDashboard();
+        setDashboard(dashboardResponse.data.data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch data. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div className="text-red-500">{error}</div>;
+
+  return (
+    <div className="p-4 space-y-6">
+      {portfolio && <PortfolioCard portfolio={portfolio} />}
+      {dashboard && <TopGainersLosers data={dashboard} />}
+      {dashboard && <RecentNews news={dashboard.recentNews} />}
+      {dashboard && <ActiveAlerts alerts={dashboard.activeAlerts} />}
+    </div>
+  );
+};
+
+export default Dashboard;
