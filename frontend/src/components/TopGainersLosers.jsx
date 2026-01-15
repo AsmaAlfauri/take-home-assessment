@@ -22,7 +22,7 @@ const TopGainersLosers = ({ data }) => {
     <div className="space-y-6">
       {/* Top Gainers */}
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Top Gainers</h2>
+        <h2 className="text-xl font-semibold mb-4">📈 Top Gainers</h2>
         <ul className="space-y-2">
           {topGainers.slice(0, 3).map(renderAsset)}
         </ul>
@@ -30,7 +30,7 @@ const TopGainersLosers = ({ data }) => {
 
       {/* Top Losers */}
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Top Losers</h2>
+        <h2 className="text-xl font-semibold mb-4">📉 Top Losers</h2>
         <ul className="space-y-2">
           {topLosers.slice(0, 3).map(renderAsset)}
         </ul>
