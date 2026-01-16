@@ -1,8 +1,8 @@
 const Watchlist = ({ symbols }) => {
   return (
-    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md transition-colors duration-300">
-      <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
-        Watchlist
+    <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-md transition-colors duration-300">
+      <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
+        📌 Watchlist
       </h2>
       <ul className="flex flex-wrap gap-2">
         {symbols.map((symbol, index) => (

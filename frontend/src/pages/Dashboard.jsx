@@ -40,17 +40,19 @@ const Dashboard = () => {
     return <Error message={error} onRetry={() => window.location.reload()} />;
 
   return (
-    <div className="p-4 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
-      <div className="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
-        <div className="md:w-1/2">
+    <div className="p-4 sm:p-6 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
+      {/* Top Section: Gainers/Losers + News + Alerts */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="lg:w-1/2 space-y-6">
           <TopGainersLosers data={dashboard} />
         </div>
-        <div className="md:w-1/2 space-y-6">
+        <div className="lg:w-1/2 space-y-6">
           <RecentNews news={dashboard.recentNews} />
           <ActiveAlerts alerts={dashboard.activeAlerts} />
         </div>
       </div>
 
+      {/* Portfolio */}
       <div className="w-full">
         <PortfolioCard portfolio={portfolio} />
       </div>

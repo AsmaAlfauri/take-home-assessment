@@ -3,6 +3,7 @@ import { getNews } from "../services/api";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import NewsList from "../components/NewsList";
+import { categoryColor } from "../utils/categoryColor";
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -28,7 +29,7 @@ const News = () => {
 
   const filteredNews = () => {
     if (category === "All") return news;
-    return news.filter((item) => item.category === category);
+    return news.filter((item) => item.category.toLowerCase() === category.toLowerCase());
   };
 
   if (loading) return <Loading count={5} height={50} />;
@@ -46,8 +47,8 @@ const News = () => {
   ];
 
   return (
-    <div className="p-4 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen text-gray-900 dark:text-white">
-      <h1 className="text-3xl font-bold mb-4">News</h1>
+    <div className="p-4 sm:p-6 space-y-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen text-gray-900 dark:text-white">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-4">📰 News</h1>
 
       {/* Category Filter */}
       <div className="flex flex-wrap gap-2 mb-4">
@@ -58,7 +59,9 @@ const News = () => {
             className={`px-4 py-2 rounded-md font-semibold border transition-colors duration-300 transform transition-all duration-300 hover:scale-105 hover:shadow-xl
               ${
                 category === cat
-                  ? "bg-blue-500 text-white "
+                  ? category !== "All"
+                    ? categoryColor(cat)
+                    : "bg-blue-500 text-white dark:bg-blue-600 dark:text-white"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
           >

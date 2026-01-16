@@ -15,7 +15,7 @@ const PortfolioChart = ({ assets, darkMode }) => {
     <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md transition-colors duration-300 ">
       <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Asset Values</h2>
       <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 10 }} >
+        <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
           <XAxis dataKey="name" tick={axisStyle} />
           <YAxis tick={axisStyle} />
           <Tooltip 
