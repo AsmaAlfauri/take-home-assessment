@@ -29,7 +29,15 @@ const News = () => {
 
   const filteredNews = () => {
     if (category === "All") return news;
-    return news.filter((item) => item.category.toLowerCase() === category.toLowerCase());
+    return news.filter(
+      (item) => item.category.toLowerCase() === category.toLowerCase()
+    );
+  };
+
+  // عد الأخبار لكل category
+  const countByCategory = (cat) => {
+    if (cat === "All") return news.length;
+    return news.filter((item) => item.category.toLowerCase() === cat.toLowerCase()).length;
   };
 
   if (loading) return <Loading count={5} height={50} />;
@@ -59,13 +67,13 @@ const News = () => {
             className={`px-4 py-2 rounded-md font-semibold border transition-colors duration-300 transform transition-all duration-300 hover:scale-105 hover:shadow-xl
               ${
                 category === cat
-                  ? category !== "All"
-                    ? categoryColor(cat)
-                    : "bg-blue-500 text-white dark:bg-blue-600 dark:text-white"
+                  ? cat === "All"
+                    ? "bg-blue-500 text-white dark:bg-blue-600 dark:text-white"
+                    : categoryColor(cat)
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
               }`}
           >
-            {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            {cat.charAt(0).toUpperCase() + cat.slice(1)} ({countByCategory(cat)})
           </button>
         ))}
       </div>

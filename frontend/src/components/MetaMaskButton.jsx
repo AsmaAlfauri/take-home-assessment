@@ -101,7 +101,7 @@ const MetaMaskButton = () => {
       title={!isMetaMaskAvailable && typeof window !== 'undefined' && typeof window.ethereum === 'undefined' ? 'MetaMask not installed' : ''}
     >
       {isConnected ? (
-        <span>🦊 {formatAddress(account)}</span>
+        <span>🦊 {Address(account)}</span>
       ) : (
         <span>Connect MetaMask</span>
       )}

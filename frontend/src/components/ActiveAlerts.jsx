@@ -1,5 +1,5 @@
 import { severityColor } from "../utils/severityColor";
-import { formatDate } from "../utils/formatDate";
+import {  formatTimestamp } from "../utils/formatDate";
 
 const ActiveAlerts = ({ alerts }) => {
   return (
@@ -23,8 +23,8 @@ const ActiveAlerts = ({ alerts }) => {
                 <p className="text-gray-700 dark:text-gray-200 text-sm sm:text-base break-words">
                   {alert.message}
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">
-                  {formatDate(alert.timestamp)}
+                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                  {formatTimestamp(alert.timestamp)}
                 </p>
               </div>
               <span

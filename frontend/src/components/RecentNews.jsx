@@ -1,5 +1,5 @@
 import { categoryColor } from "../utils/categoryColor";
-import { formatDate } from "../utils/formatDate";
+import {  formatTimestamp } from "../utils/formatDate";
 
 const RecentNews = ({ news }) => {
 
@@ -21,7 +21,7 @@ const RecentNews = ({ news }) => {
                 {item.title}
               </p>
               <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">
-                {item.source} • {formatDate(item.timestamp)}
+                {item.source} • {formatTimestamp(item.timestamp)}
               </p>
             </div>
 

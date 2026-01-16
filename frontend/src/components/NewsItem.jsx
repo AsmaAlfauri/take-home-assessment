@@ -1,3 +1,4 @@
+import { formatTimestamp } from "../utils/formatDate";
 import { impactColors } from "../utils/impactColors";
 
 
@@ -8,7 +9,8 @@ const NewsItem = ({ item }) => {
       <div className="flex-1">
         <p className="font-semibold text-lg sm:text-xl text-gray-900 dark:text-gray-100">{item.title}</p>
         <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm mt-0.5">
-          {item.source} • {new Date(item.timestamp).toLocaleString()}
+          {item.source} • {formatTimestamp(item.timestamp)}
+
         </p>
         <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base mt-1">{item.summary}</p>
         {item.affectedAssets.length > 0 && (
